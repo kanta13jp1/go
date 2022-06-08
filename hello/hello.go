@@ -5,9 +5,11 @@ import (
 	"log"
 
 	"github.com/kanta13jp1/go/greetings"
+	"golang.org/x/example/stringutil"
 )
 
 func main() {
+	fmt.Println(stringutil.ToUpper("Hello"))
 	// Set properties of the predefined Logger, including
 	// the log entry prefix and a flag to disable printing
 	// the time, source file, and line number.

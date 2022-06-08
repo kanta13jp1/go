@@ -2,6 +2,6 @@ module github.com/kanta13jp1/go/hello
 
 go 1.18
 
-require github.com/kanta13jp1/go/greetings v0.0.0-20220607224728-93339bd139f4
+require github.com/kanta13jp1/go/greetings v0.0.0-20220608225118-445d243ca56d
 
-replace github.com/kanta13jp1/go/greetings => ../greetings
+require golang.org/x/example v0.0.0-20220412213650-2e68773dfca0 // indirect
