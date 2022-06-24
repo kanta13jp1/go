@@ -15,7 +15,10 @@ import (
 	"golang.org/x/example/stringutil"
 )
 
-var templates = template.Must(template.ParseFiles("edit.html", "view.html"))
+// Working Directory
+var wd, _ = os.Getwd()
+
+var templates = template.Must(template.ParseFiles("tmpl/edit.html", "tmpl/view.html"))
 
 var validPath = regexp.MustCompile("^/(edit|save|view)/([a-zA-Z0-9]+)$")
 
@@ -83,6 +86,8 @@ func main() {
 	p1.save()
 	p2, _ := loadPage("TestPage")
 	fmt.Println(string(p2.Body))
+
+	fmt.Println(wd)
 
 	fmt.Println(stringutil.ToUpper("Hello"))
 	// Set properties of the predefined Logger, including
@@ -161,15 +166,6 @@ func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
-}
-
-func getTitle(w http.ResponseWriter, r *http.Request) (string, error) {
-	m := validPath.FindStringSubmatch(r.URL.Path)
-	if m == nil {
-		http.NotFound(w, r)
-		return "", errors.New("invalid Page Title")
-	}
-	return m[2], nil // The title is the second subexpression.
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -264,12 +260,12 @@ func Reverse(s string) (string, error) {
 }
 
 func (p *Page) save() error {
-	filename := p.Title + ".txt"
+	filename := "data/" + p.Title + ".txt"
 	return os.WriteFile(filename, p.Body, 0600)
 }
 
 func loadPage(title string) (*Page, error) {
-	filename := title + ".txt"
+	filename := "data/" + title + ".txt"
 	body, err := os.ReadFile(filename)
 	if err != nil {
 		return nil, err
