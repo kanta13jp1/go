@@ -1,0 +1,5 @@
+This is Top Page.
+
+<a href='/view/test'>test</a>
+
+[test]

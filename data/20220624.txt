@@ -1,21 +1,21 @@
-議事録
+<h1>議事録</h1>
 
-参加者：XXXXX
+<h2>参加者：XXXXX</h2>
 
-アジェンダ：
-・XXXXX
-・XXXXX
-・XXXXX
+<h3>アジェンダ：</h3>
+<p>・XXXXX</p>
+<p>・XXXXX</p>
+<p>・XXXXX</p>
 
-議事内容：
+<h3>議事内容：</h3>
 
-- XXXXXXXXXXXXXXXX
+<p>- XXXXXXXXXXXXXXXX</p>
 
-- XXXXXXXXXXXXXXXX
+<p>- XXXXXXXXXXXXXXXX</p>
 
-- XXXXXXXXXXXXXXXX
+<p>- XXXXXXXXXXXXXXXX</p>
 
-決定事項：
-・XXXXX
-・XXXXX
-・XXXXX
+<h3>決定事項：</h3>
+<p>・XXXXX</p>
+<p>・XXXXX</p>
+<p>・XXXXX</p>
