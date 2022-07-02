@@ -13,7 +13,9 @@ import (
 	"unicode/utf8"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/go-cmp/cmp"
 	"github.com/kanta13jp1/go/greetings"
+	"github.com/kanta13jp1/go/hello/morestrings"
 	"golang.org/x/example/stringutil"
 )
 
@@ -132,6 +134,10 @@ func imageHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+
+	fmt.Println(morestrings.ReverseRunes("!oG ,olleH"))
+	fmt.Println(cmp.Diff("Hello World", "Hello Go"))
+
 	// Initialize a map for the integer values
 	ints := map[string]int64{
 		"first":  34,

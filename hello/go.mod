@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/gin-gonic/gin v1.8.1
+	github.com/google/go-cmp v0.5.5
 	github.com/kanta13jp1/go/greetings v0.0.0-20220608225118-445d243ca56d
 )
 
