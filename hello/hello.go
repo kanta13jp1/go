@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"errors"
 	"fmt"
 	"html/template"
@@ -13,7 +14,9 @@ import (
 	"unicode/utf8"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-sql-driver/mysql"
 	"github.com/google/go-cmp/cmp"
+	"github.com/joho/godotenv"
 	"github.com/kanta13jp1/go/greetings"
 	"github.com/kanta13jp1/go/hello/morestrings"
 	"golang.org/x/example/stringutil"
@@ -133,7 +136,50 @@ func imageHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+var db *sql.DB
+
+// .envを呼び出します。
+func loadEnv() {
+	// ここで.envファイル全体を読み込みます。
+	// この読み込み処理がないと、個々の環境変数が取得出来ません。
+	// 読み込めなかったら err にエラーが入ります。
+	err := godotenv.Load(".env")
+
+	// もし err がnilではないなら、"読み込み出来ませんでした"が出力されます。
+	if err != nil {
+		fmt.Printf("読み込み出来ませんでした: %v", err)
+	}
+
+	// .envの SAMPLE_MESSAGEを取得して、messageに代入します。
+	message := os.Getenv("SAMPLE_MESSAGE")
+
+	fmt.Println(message)
+}
+
 func main() {
+	//func loadEnvを呼び出します。
+	loadEnv()
+
+	// Capture connection properties.
+	cfg := mysql.Config{
+		User:   os.Getenv("DBUSER"),
+		Passwd: os.Getenv("DBPASS"),
+		Net:    "tcp",
+		Addr:   "127.0.0.1:3307",
+		DBName: "recordings",
+	}
+	// Get a database handle.
+	var err error
+	db, err = sql.Open("mysql", cfg.FormatDSN())
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	pingErr := db.Ping()
+	if pingErr != nil {
+		log.Fatal(pingErr)
+	}
+	fmt.Println("Connected!")
 
 	fmt.Println(morestrings.ReverseRunes("!oG ,olleH"))
 	fmt.Println(cmp.Diff("Hello World", "Hello Go"))
